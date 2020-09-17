@@ -84,6 +84,10 @@ export default {
       commit(SET_SEANSES, seanses);
     },
     async UPDATE_BY_DATE({ commit, state, dispatch }, date) {
+      if (date == null) return;
+
+      console.log(date);
+
       commit(SET_CURRENT_DATE, date);
 
       const response = await axios.get(seanses_url, {
@@ -128,6 +132,11 @@ export default {
     },
     async CREATE_RESERV({ dispatch }, data) {
       try {
+        if (data?.date === null) {
+          alert("Дата не введена!");
+
+          return;
+        }
         const response = await axios.post(`${urlPrefix}api/seans`, data);
 
         dispatch(FETCH_SEANSES);
