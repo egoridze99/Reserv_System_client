@@ -139,8 +139,8 @@ export default {
 
         dispatch(FETCH_SEANSES);
         alert("Запись добавлена!");
-      } catch {
-        alert("Произошла ошибка");
+      } catch (err) {
+        alert(err.response.data.msg);
       }
     },
     async FETCH_MONEY({ commit }, date) {
