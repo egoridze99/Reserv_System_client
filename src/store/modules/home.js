@@ -86,8 +86,6 @@ export default {
     async UPDATE_BY_DATE({ commit, state, dispatch }, date) {
       if (date == null) return;
 
-      console.log(date);
-
       commit(SET_CURRENT_DATE, date);
 
       const response = await axios.get(seanses_url, {
