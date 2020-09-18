@@ -16,3 +16,4 @@ export const SET_CURRENT_ROOM = "SET_CURRENT_ROOM";
 export const SUCCESS_AUTH = "SUCCESS_AUTH";
 export const LOGOUT = "LOGOUT";
 export const SET_MONEY = "SET_MONEY";
+export const TOGGLE_LOADER = "TOGGLE_LOADER";

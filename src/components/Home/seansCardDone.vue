@@ -206,6 +206,12 @@
     <md-card-actions>
       <md-button @click="changeMode" class="md-accent">Отменить</md-button>
       <md-button @click="submitChanges" class="md-primary">Сохранить</md-button>
+      <md-progress-spinner
+        v-if="loader"
+        :md-diameter="30"
+        :md-stroke="3"
+        md-mode="indeterminate"
+      ></md-progress-spinner>
     </md-card-actions>
   </md-card>
 </template>
@@ -306,6 +312,9 @@ export default {
         default:
           return this.status;
       }
+    },
+    loader() {
+      return this.$store.state.home.loader;
     }
   },
   props: [

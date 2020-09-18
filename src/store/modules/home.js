@@ -7,7 +7,8 @@ import {
   UPDATE_SEANS,
   FETCH_SEANSES,
   FETCH_MONEY,
-  SET_MONEY
+  SET_MONEY,
+  TOGGLE_LOADER
 } from "../consts";
 import * as axios from "axios";
 import format from "date-fns/format";
@@ -22,7 +23,8 @@ export default {
     currentRoom: "Абстракция",
     rooms: [],
     seanses: [],
-    money: {}
+    money: {},
+    loader: false
   },
   mutations: {
     SET_ROOMS(state, rooms) {
@@ -61,6 +63,9 @@ export default {
       item.status = data.status;
       item.time = data.time;
       item.checkout = [...data.checkouts];
+    },
+    TOGGLE_LOADER(state) {
+      state.loader = !state.loader;
     }
   },
   actions: {
@@ -110,6 +115,7 @@ export default {
     },
     async UPDATE_SEANS({ commit, state, dispatch }, newData) {
       try {
+        commit(TOGGLE_LOADER);
         const response = await axios.put(
           `${urlPrefix}api/seans/` + newData.id,
           newData
@@ -117,14 +123,11 @@ export default {
 
         dispatch(FETCH_MONEY, state.currentDate);
 
-        if (state.currentRoom !== newData.room) {
-          dispatch(FETCH_SEANSES);
-          Promise.resolve();
-        } else {
-          commit(UPDATE_SEANS, newData);
-          Promise.resolve();
-        }
+        await dispatch(FETCH_SEANSES);
+        commit(TOGGLE_LOADER);
+        return Promise.resolve();
       } catch (err) {
+        commit(TOGGLE_LOADER);
         alert(err.response.data.message);
       }
     },
