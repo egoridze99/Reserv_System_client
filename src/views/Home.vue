@@ -37,6 +37,7 @@
               v-model="currentRoom"
               @input="UPDATE_BY_ROOM"
             >
+              <md-option value="all">Все комнаты</md-option>
               <md-option v-for="room in rooms" :key="room" :value="room">{{
                 room
               }}</md-option>
@@ -77,7 +78,7 @@
           :card="seans.card"
           :cash="seans.cash"
           :status="seans.status"
-          :room="currentRoom"
+          :room="seans.room"
           :checkouts="seans.checkout"
         ></seans-card-done>
       </md-app-content>
