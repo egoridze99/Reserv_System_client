@@ -14,7 +14,6 @@
         <md-input v-model="password" type="password"></md-input>
       </md-field>
       <md-button class="md-primary" @click="submitForm">Войти</md-button>
-      <p>Вернуться на <router-link to="/">главную</router-link></p>
     </div>
   </div>
 </template>
@@ -38,7 +37,7 @@ export default {
         login: this.login,
         password: this.password
       })
-        .then(() => this.$router.push("/admin"))
+        .then(() => this.$router.push("/"))
         .catch(err => (this.error = err));
     }
   }

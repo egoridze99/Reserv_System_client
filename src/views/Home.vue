@@ -14,9 +14,10 @@
             <span class="md-title">Система бронирование Film is...</span>
           </div>
           <div class="md-toolbar-section-end">
-            <router-link to="/login" class="link"
+            <router-link to="/admin" class="link" v-if="isAdmin"
               >Панель администратора</router-link
             >
+            <router-link to="/logout" class="link">Выйти</router-link>
           </div>
         </div>
         <newReservWindow
@@ -137,6 +138,9 @@ export default {
     },
     showSnackbar: function() {
       return Object.keys(this.money).length > 0;
+    },
+    isAdmin: function() {
+      return localStorage.getItem("role") === "1";
     }
   },
   methods: {
@@ -216,5 +220,15 @@ export default {
     margin: 0 auto;
     width: 100%;
   }
+}
+
+.link {
+  color: #fff !important;
+  font-size: 16px !important;
+  margin-right: 20px;
+}
+
+.md-toolbar.md-large.md-dense {
+  min-height: 64px !important;
 }
 </style>

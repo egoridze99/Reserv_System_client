@@ -19,6 +19,12 @@
           <md-tab id="tab-rejected" md-label="Отмененные сеансы">
             <canceld-tab />
           </md-tab>
+          <md-tab id="tab-new-user" md-label="Добавить нового пользователя">
+            <new-user-tab />
+          </md-tab>
+          <md-tab id="reservs-tab" md-label="Поиск броней по номеру">
+            <reservs-tab />
+          </md-tab>
         </md-tabs>
       </md-app-content>
     </md-app>
@@ -28,10 +34,14 @@
 <script>
 import Common from "../components/Admin/Common";
 import Canceled from "../components/Admin/Canceled";
+import NewUser from "../components/Admin/NewUser";
+import Reservs from '../components/Admin/Reservs';
 export default {
   components: {
     "common-tab": Common,
-    "canceld-tab": Canceled
+    "canceld-tab": Canceled,
+    "new-user-tab": NewUser,
+    "reservs-tab": Reservs
   },
   created() {
     this.$store.dispatch("FETCH_ROOMS");

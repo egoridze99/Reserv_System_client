@@ -12,7 +12,10 @@ const routes = [
   {
     path: "/",
     name: "Home",
-    component: Home
+    component: Home,
+    meta: {
+      requiresAuth: true
+    }
   },
   {
     path: "/login",
@@ -32,7 +35,8 @@ const routes = [
     name: "Admin",
     component: Admin,
     meta: {
-      requiresAuth: true
+      requiresAuth: true,
+      requiresAdmin: true
     }
   }
 ];
@@ -46,6 +50,14 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth)) {
     if (store.getters.isLoggedIn) {
+      if (to.matched.some(record => record.meta.requiresAdmin)) {
+        if (localStorage.getItem("role") !== "1") {
+          console.log("*");
+          next("/");
+          return;
+        }
+      }
+
       next();
       return;
     }
@@ -53,7 +65,7 @@ router.beforeEach((to, from, next) => {
   }
   if (to.matched.some(record => record.meta.loginPage)) {
     if (store.getters.isLoggedIn) {
-      next("/admin");
+      next("/");
       return;
     }
   }
