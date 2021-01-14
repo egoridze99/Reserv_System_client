@@ -30,8 +30,11 @@ export default new Vuex.Store({
 
         const token = response.data.token;
         const role = response.data.role;
+        const name = response.data.name;
+
         localStorage.setItem("token", token);
         localStorage.setItem("role", role);
+        localStorage.setItem("name", name);
         axios.defaults.headers.common["Authorization"] = token;
 
         commit(SUCCESS_AUTH, token);
@@ -39,6 +42,7 @@ export default new Vuex.Store({
       } catch (err) {
         localStorage.removeItem("token");
         localStorage.removeItem("role");
+        localStorage.removeItem("name");
         return Promise.reject(err.response.data.msg);
       }
     },
@@ -47,6 +51,7 @@ export default new Vuex.Store({
 
       localStorage.removeItem("token");
       localStorage.removeItem("role");
+      localStorage.removeItem("name");
       delete axios.defaults.headers.common["Authorization"];
     }
   },

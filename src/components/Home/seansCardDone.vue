@@ -2,6 +2,7 @@
   <md-card v-if="mode === 'done'">
     <md-card-header>
       <div class="md-title">{{ room }}</div>
+      <div class="md-title2">{{ name }}</div>
     </md-card-header>
 
     <md-card-content>
@@ -330,7 +331,8 @@ export default {
     "cash",
     "status",
     "room",
-    "checkouts"
+    "checkouts",
+    "name"
   ]
 };
 </script>
