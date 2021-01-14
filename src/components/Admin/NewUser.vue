@@ -11,6 +11,14 @@
           <label>Пароль</label>
           <md-input v-model="password" type="password"></md-input>
         </md-field>
+        <md-field>
+          <label>Имя</label>
+          <md-input v-model="name"></md-input>
+        </md-field>
+        <md-field>
+          <label>Фамилия</label>
+          <md-input v-model="surname"></md-input>
+        </md-field>
         <md-button type="submit" class="md-primary md-raised"
           >Добавить</md-button
         >
@@ -27,6 +35,8 @@ export default {
     return {
       login: "",
       password: "",
+      name: "",
+      surname: ""
     };
   },
   methods: {
@@ -35,15 +45,19 @@ export default {
         await this.$http.post(`${urlPrefix}admin_api/new_user`, {
           login: this.login,
           password: this.password,
+          name: this.name,
+          surname: this.surname
         });
 
         this.login = "";
         this.password = "";
+        this.name = "";
+        this.surname = "";
       } catch (e) {
         alert(e.response.data.msg);
       }
-    },
-  },
+    }
+  }
 };
 </script>
 
