@@ -16,7 +16,7 @@
           <md-tab id="tab-common" md-label="Общие сведения">
             <common-tab />
           </md-tab>
-          <md-tab id="tab-rejected" md-label="Отмененные сеансы">
+          <md-tab id="tab-rejected" md-label="Поиск по статусу">
             <canceld-tab />
           </md-tab>
           <md-tab id="tab-new-user" md-label="Добавить нового пользователя">

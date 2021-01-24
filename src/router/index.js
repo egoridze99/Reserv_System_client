@@ -14,7 +14,8 @@ const routes = [
     name: "Home",
     component: Home,
     meta: {
-      requiresAuth: true
+      requiresAuth: true,
+      title: "Система бронирования"
     }
   },
   {
@@ -22,7 +23,8 @@ const routes = [
     name: "LoginPage",
     component: LoginPage,
     meta: {
-      loginPage: true
+      loginPage: true,
+      title: "Авторизация"
     }
   },
   {
@@ -36,7 +38,8 @@ const routes = [
     component: Admin,
     meta: {
       requiresAuth: true,
-      requiresAdmin: true
+      requiresAdmin: true,
+      title: "Админ панель"
     }
   }
 ];
@@ -48,6 +51,8 @@ const router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
+  document.title = to.meta.title || "Film is";
+
   if (to.matched.some(record => record.meta.requiresAuth)) {
     if (store.getters.isLoggedIn) {
       if (to.matched.some(record => record.meta.requiresAdmin)) {
