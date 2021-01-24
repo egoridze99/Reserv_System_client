@@ -67,6 +67,7 @@
           v-for="seans in seanses"
           :key="seans.id"
           :id="seans.id"
+          :date="seans.date"
           :time="seans.time"
           :duration="seans.duration"
           :count="seans.count"

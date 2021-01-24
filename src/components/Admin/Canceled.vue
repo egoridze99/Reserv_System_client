@@ -10,6 +10,12 @@
           <label>До</label>
           <md-input placeholder="гггг-мм-дд" v-model="till"></md-input>
         </md-field>
+        <md-field class="md-layout-item">
+          <md-select v-model="type">
+            <md-option value="canceled">Отмененные</md-option>
+            <md-option value="opened">Незакрытые</md-option>
+          </md-select>
+        </md-field>
         <md-field class="md-layout-item"
           ><md-button
             class="md-raised md-primary md-layout-item"
@@ -43,6 +49,7 @@
         :room="seans.room"
         :checkouts="seans.checkout"
         :name="seans.name"
+        :date="seans.date"
       ></seans-card-done>
     </div>
   </div>
@@ -57,15 +64,17 @@ export default {
     return {
       untill: format(new Date(), "yyyy-MM-dd"),
       till: format(new Date(), "yyyy-MM-dd"),
+      type: "canceled",
       seanses: []
     };
   },
   methods: {
     async fetchCanceled() {
-      const response = await this.$http.get(`${urlPrefix}admin_api/canceled`, {
+      const response = await this.$http.get(`${urlPrefix}admin_api/statused`, {
         params: {
           untill: this.untill,
-          till: this.till
+          till: this.till,
+          mode: this.type
         }
       });
       this.seanses = [...response.data];

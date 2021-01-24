@@ -37,6 +37,7 @@
         :room="seans.room"
         :checkouts="seans.checkout"
         :name="seans.name"
+        :date="seans.date"
       ></seans-card-done>
     </div>
   </div>

@@ -2,7 +2,8 @@
   <md-card v-if="mode === 'done'">
     <md-card-header>
       <div class="md-title">{{ room }}</div>
-      <div class="md-title2">{{ name }}</div>
+      <div class="md-title">{{ name }}</div>
+      <div class="md-title2">Дата: {{ dateFormated }}</div>
     </md-card-header>
 
     <md-card-content>
@@ -316,6 +317,29 @@ export default {
     },
     loader() {
       return this.$store.state.home.loader;
+    },
+    dateFormated() {
+      const months = [
+        "января",
+        "февраля",
+        "марта",
+        "апреля",
+        "мая",
+        "июня",
+        "июля",
+        "августа",
+        "сентября",
+        "октября",
+        "ноября",
+        "декабря"
+      ];
+
+      const date = new Date(this.date);
+      const day = date.getDate();
+      const month = months[date.getMonth()];
+      const year = date.getUTCFullYear();
+
+      return `${day} ${month} ${year}`;
     }
   },
   props: [
@@ -332,7 +356,8 @@ export default {
     "status",
     "room",
     "checkouts",
-    "name"
+    "name",
+    "date"
   ]
 };
 </script>
