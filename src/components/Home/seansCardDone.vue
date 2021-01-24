@@ -2,7 +2,7 @@
   <md-card v-if="mode === 'done'">
     <md-card-header>
       <div class="md-title">{{ room }}</div>
-      <div class="md-title">{{ name }}</div>
+      <div class="md-title2">{{ name }}</div>
       <div class="md-title2">Дата: {{ dateFormated }}</div>
     </md-card-header>
 
