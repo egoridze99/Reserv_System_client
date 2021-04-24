@@ -45,7 +45,7 @@
     </md-card-content>
 
     <md-card-actions>
-      <md-button @click="changeMode" class="md-primary"
+      <md-button @click="changeMode" class="md-primary" v-if="isNotOperator"
         >Редактировать</md-button
       >
     </md-card-actions>
@@ -340,6 +340,9 @@ export default {
       const year = date.getUTCFullYear();
 
       return `${day} ${month} ${year}`;
+    },
+    isNotOperator: function() {
+      return this.$store.state.role !== "operator";
     }
   },
   props: [

@@ -56,8 +56,7 @@ router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth)) {
     if (store.getters.isLoggedIn) {
       if (to.matched.some(record => record.meta.requiresAdmin)) {
-        if (localStorage.getItem("role") !== "1") {
-          console.log("*");
+        if (localStorage.getItem("role") !== "root") {
           next("/");
           return;
         }

@@ -54,7 +54,7 @@
             </md-datepicker>
           </md-field>
         </div>
-        <md-button class="md-primary" @click="toggleModal"
+        <md-button v-if="isNotOperator" class="md-primary" @click="toggleModal"
           >Добавить резерв</md-button
         >
       </md-app-drawer>
@@ -142,7 +142,10 @@ export default {
       return Object.keys(this.money).length > 0;
     },
     isAdmin: function() {
-      return localStorage.getItem("role") === "1";
+      return this.$store.state.role === "root";
+    },
+    isNotOperator: function() {
+      return this.$store.state.role !== "operator";
     }
   },
   methods: {

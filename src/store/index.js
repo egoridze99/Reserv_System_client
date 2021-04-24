@@ -12,11 +12,15 @@ import { SUCCESS_AUTH } from "./consts";
 
 export default new Vuex.Store({
   state: {
-    token: localStorage.getItem("token")
+    token: localStorage.getItem("token"),
+    role: localStorage.getItem("role"),
+    name: localStorage.getItem("name")
   },
   mutations: {
-    SUCCESS_AUTH(state, token) {
+    SUCCESS_AUTH(state, { token, role, name }) {
       state.token = token;
+      state.role = role;
+      state.name = name;
     },
     LOGOUT(state) {
       state.token = "";
@@ -37,7 +41,7 @@ export default new Vuex.Store({
         localStorage.setItem("name", name);
         axios.defaults.headers.common["Authorization"] = token;
 
-        commit(SUCCESS_AUTH, token);
+        commit(SUCCESS_AUTH, { token, role, name });
         return Promise.resolve(token);
       } catch (err) {
         localStorage.removeItem("token");

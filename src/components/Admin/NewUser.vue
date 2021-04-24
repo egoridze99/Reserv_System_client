@@ -19,6 +19,13 @@
           <label>Фамилия</label>
           <md-input v-model="surname"></md-input>
         </md-field>
+        <md-field>
+          <md-select v-model="role">
+            <md-option value="root">Суперюзер (второй босс)</md-option>
+            <md-option value="admin">Администратор</md-option>
+            <md-option value="operator">Оператор</md-option>
+          </md-select>
+        </md-field>
         <md-button type="submit" class="md-primary md-raised"
           >Добавить</md-button
         >
@@ -36,7 +43,8 @@ export default {
       login: "",
       password: "",
       name: "",
-      surname: ""
+      surname: "",
+      role: "admin",
     };
   },
   methods: {
@@ -46,18 +54,21 @@ export default {
           login: this.login,
           password: this.password,
           name: this.name,
-          surname: this.surname
+          surname: this.surname,
+          role: this.role,
         });
 
         this.login = "";
         this.password = "";
         this.name = "";
         this.surname = "";
+
+        alert("Пользователь зарегестрирован");
       } catch (e) {
-        alert(e.response.data.msg);
+        alert(e.response.data.message);
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
