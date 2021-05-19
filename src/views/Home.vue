@@ -83,6 +83,7 @@
           :room="seans.room"
           :checkouts="seans.checkout"
           :name="seans.name"
+          :created_at="seans.created_at"
         ></seans-card-done>
       </md-app-content>
     </md-app>
@@ -116,7 +117,7 @@ import {
   FETCH_SEANSES,
   UPDATE_BY_DATE,
   UPDATE_BY_ROOM,
-  FETCH_MONEY
+  FETCH_MONEY,
 } from "@/store/consts";
 import seansCardDone from "../components/Home/seansCardDone";
 import newReservWindow from "../components/Home/newReservWindow";
@@ -124,29 +125,29 @@ export default {
   name: "Home",
   data: () => ({
     menuVisible: false,
-    showDialog: false
+    showDialog: false,
   }),
   computed: {
     ...mapGetters({
       currentDate: "getCurrentDate",
       seanses: "getSeanses",
-      money: "getMoney"
+      money: "getMoney",
     }),
-    rooms: function() {
+    rooms: function () {
       return this.$store.state.home.rooms;
     },
-    currentRoom: function() {
+    currentRoom: function () {
       return this.$store.state.home.currentRoom;
     },
-    showSnackbar: function() {
+    showSnackbar: function () {
       return Object.keys(this.money).length > 0;
     },
-    isAdmin: function() {
+    isAdmin: function () {
       return this.$store.state.role === "root";
     },
-    isNotOperator: function() {
+    isNotOperator: function () {
       return this.$store.state.role !== "operator";
-    }
+    },
   },
   methods: {
     ...mapActions([
@@ -154,20 +155,20 @@ export default {
       FETCH_SEANSES,
       UPDATE_BY_DATE,
       UPDATE_BY_ROOM,
-      FETCH_MONEY
+      FETCH_MONEY,
     ]),
     toggleModal() {
       this.showDialog = !this.showDialog;
-    }
+    },
   },
-  created: function() {
+  created: function () {
     this.FETCH_ROOMS();
     this.FETCH_SEANSES();
   },
   components: {
     seansCardDone,
-    newReservWindow
-  }
+    newReservWindow,
+  },
 };
 </script>
 

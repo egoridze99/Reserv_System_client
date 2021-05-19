@@ -38,6 +38,7 @@
         :checkouts="seans.checkout"
         :name="seans.name"
         :date="seans.date"
+        :created_at="seans.created_at"
       ></seans-card-done>
     </div>
   </div>
@@ -49,10 +50,10 @@ import seansCardDone from "../Home/seansCardDone";
 export default {
   name: "reservs-tab",
   components: {
-    "seans-card-done": seansCardDone
+    "seans-card-done": seansCardDone,
   },
   computed: {
-    rooms: function() {
+    rooms: function () {
       return this.$store.state.home.rooms;
     },
   },

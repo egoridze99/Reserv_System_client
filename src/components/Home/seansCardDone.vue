@@ -4,6 +4,10 @@
       <div class="md-title">{{ room }}</div>
       <div class="md-title2">{{ name }}</div>
       <div class="md-title2">Дата: {{ dateFormated }}</div>
+      <div class="md-title2" v-if="created_at">
+        Дата создания резерва: {{ created_at }}
+      </div>
+      <div class="md-title2">Номер резерва: {{ id }}</div>
     </md-card-header>
 
     <md-card-content>
@@ -224,7 +228,7 @@ import { mapActions } from "vuex";
 
 export default {
   name: "seans-card-done",
-  data: function() {
+  data: function () {
     return {
       mode: "done",
       time_corrected: this.time,
@@ -239,11 +243,11 @@ export default {
       status_corrected: this.status,
       room_corrected: this.room,
       rooms: this.$store.state.home.rooms,
-      checkouts_corrected: this.checkouts.map(item => ({
+      checkouts_corrected: this.checkouts.map((item) => ({
         id: item.id,
         summ: item.summ,
-        note: item.note
-      }))
+        note: item.note,
+      })),
     };
   },
   methods: {
@@ -263,10 +267,10 @@ export default {
         this.cash_corrected = this.cash;
         this.status_corrected = this.status;
         this.room_corrected = this.room;
-        this.checkouts_corrected = this.checkouts.map(item => ({
+        this.checkouts_corrected = this.checkouts.map((item) => ({
           id: item.id,
           summ: item.summ,
-          note: item.note
+          note: item.note,
         }));
       }
     },
@@ -284,7 +288,7 @@ export default {
         cash: this.cash_corrected,
         status: this.status_corrected,
         room: this.room_corrected,
-        checkouts: this.checkouts_corrected
+        checkouts: this.checkouts_corrected,
       });
 
       this.changeMode();
@@ -294,12 +298,12 @@ export default {
         summ: 0,
         note: "",
         id: Math.random() * 1000,
-        new: true
+        new: true,
       });
-    }
+    },
   },
   computed: {
-    statusEdited: function() {
+    statusEdited: function () {
       switch (this.status) {
         case "not_allowed":
           return "Не подтверждено 🙈";
@@ -331,7 +335,7 @@ export default {
         "сентября",
         "октября",
         "ноября",
-        "декабря"
+        "декабря",
       ];
 
       const date = new Date(this.date);
@@ -341,9 +345,9 @@ export default {
 
       return `${day} ${month} ${year}`;
     },
-    isNotOperator: function() {
+    isNotOperator: function () {
       return this.$store.state.role !== "operator";
-    }
+    },
   },
   props: [
     "id",
@@ -360,8 +364,9 @@ export default {
     "room",
     "checkouts",
     "name",
-    "date"
-  ]
+    "date",
+    "created_at",
+  ],
 };
 </script>
 
@@ -383,7 +388,6 @@ export default {
 
     .md-field {
       background: rgba($color: #fff, $alpha: 0.7) !important;
-      // margin: 0 20px;
     }
   }
 

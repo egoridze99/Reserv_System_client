@@ -50,6 +50,7 @@
         :checkouts="seans.checkout"
         :name="seans.name"
         :date="seans.date"
+        :created_at="seans.created_at"
       ></seans-card-done>
     </div>
   </div>
@@ -65,7 +66,7 @@ export default {
       untill: format(new Date(), "yyyy-MM-dd"),
       till: format(new Date(), "yyyy-MM-dd"),
       type: "canceled",
-      seanses: []
+      seanses: [],
     };
   },
   methods: {
@@ -74,15 +75,15 @@ export default {
         params: {
           untill: this.untill,
           till: this.till,
-          mode: this.type
-        }
+          mode: this.type,
+        },
       });
       this.seanses = [...response.data];
-    }
+    },
   },
   components: {
-    seansCardDone
-  }
+    seansCardDone,
+  },
 };
 </script>
 
